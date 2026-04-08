@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study with Me </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #c3d9f5 0%, #a8d0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #00a8e8;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #00a8e8;
+        }
+
+        .nav-menu a.active {
+            color: #00a8e8;
+            border-bottom: 2px solid #00a8e8;
+            padding-bottom: 5px;
+        }
+
+        .login-btn {
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Container Principal */
+        .container {
+            display: flex;
+            width: 100%;
+            margin-top: 80px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 12px;
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: #00a8e8;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(0, 168, 232, 0.1);
+            color: #0080b8;
+        }
+
+        .sidebar-menu a.active {
+            font-weight: bold;
+            color: #000;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* To Do List Card */
+        .todo-card h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        .todo-input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .todo-input-container input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .todo-input-container input:focus {
+            outline: none;
+            border-color: #00a8e8;
+        }
+
+        .todo-input-container button {
+            background: #00a8e8;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            width: 45px;
+            height: 45px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .todo-input-container button:hover {
+            background: #0080b8;
+        }
+
+        .todo-list {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .todo-item.completed {
+            background: #e8f5e9;
+        }
+
+        .todo-item.completed span {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .todo-item span {
+            flex: 1;
+            color: #333;
+        }
+
+        .todo-item button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+
+        .todo-item button:hover {
+            background: #ff5252;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        /* Pomodoro Card */
+        .pomodoro-card {
+            grid-column: 2;
+            grid-row: 1 / 3;
+        }
+
+        .pomodoro-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .pomodoro-header h2 {
+            color: #ff6b6b;
+            font-size: 28px;
+        }
+
+        .settings-icon {
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .settings-icon:hover {
+            transform: rotate(20deg);
+        }
+
+        .pomodoro-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #f5f5f5;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .tab-button.active {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .tab-button:hover {
+            background: #ff8787;
+            color: white;
+        }
+
+        .timer-display {
+            text-align: center;
+            font-size: 80px;
+            font-weight: bold;
+            color: #333;
+            margin: 50px 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 10px;
+        }
+
+        .pomodoro-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn-start, .btn-reset {
+            padding: 12px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .btn-start {
+            background: #ff6b6b;
+            min-width: 120px;
+        }
+
+        .btn-start:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        .btn-start.paused {
+            background: #4caf50;
+        }
+
+        .btn-reset {
+            background: #999;
+            min-width: 120px;
+        }
+
+        .btn-reset:hover {
+            background: #777;
+            transform: scale(1.05);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ff8787);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .pomodoro-card {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .main-content {
+                padding: 20px;
+                margin-top: 100px;
+            }
+
+            .timer-display {
+                font-size: 50px;
+                letter-spacing: 5px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        /* Scrollbar */
+        .todo-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .todo-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .todo-list::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        .todo-list::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            🎓 NAJEHI
+        </div>
+        <div class="nav-menu">
+            <a href="index.html" class="active">Home</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#blog">More</a>
+             
+             <a href="index.html" onclick="logout()">Logout👤</a>
+             
+       
+        </div>
+    </nav>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Study with me Menu</h3>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active">Pomodoro timer</a></li>
+                <li><a href="#">To do list</a></li>
+                <li><a href="#">A3ml qahwa</a></li>
+                <li><a href="#">Ambient sound player</a></li>
+                <li><a href="#">Flipclock</a></li>
+                <li><a href="#">Scientific calculator</a></li>
+                <li><a href="#">Study With Me Videos Gallery</a></li>
+                <li><a href="#">Taleb coins</a></li>
+                <li><a href="#">Brain games</a></li>
+                <li><a href="#">taleb pro</a></li>
+                <li><a href="#">Taleb study games</a></li>
+                <li><a href="#">Study streak</a></li>
+                <li><a href="#">Study challenge wheel</a></li>
+                <li><a href="#">Masrouf tracker</a></li>
+                <li><a href="#">Weekly studied hours</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- To Do List Card -->
+            <div class="card todo-card">
+                <h2>To Do List</h2>
+                <div class="todo-input-container">
+                    <input 
+                        type="text" 
+                        id="todoInput" 
+                        placeholder="What needs to be done?"
+                    >
+                    <button id="addTodoBtn">+</button>
+                </div>
+                <div class="todo-list" id="todoList">
+                    <div class="empty-state">
+                        <div class="empty-icon">⏱️</div>
+                        <p>No tasks yet. Add one to get started!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pomodoro Card -->
+            <div class="card pomodoro-card">
+                <div class="pomodoro-header">
+                    <h2>Pomodoro Timer</h2>
+                    <span class="settings-icon">⚙️</span>
+                </div>
+
+                <div class="pomodoro-tabs">
+                    <button class="tab-button active" data-mode="pomodoro">
+                        Pomodoro
+                    </button>
+                    <button class="tab-button" data-mode="shortbreak">
+                        Short Break
+                    </button>
+                    <button class="tab-button" data-mode="longbreak">
+                        Long Break
+                    </button>
+                </div>
+
+                <div class="timer-display" id="timerDisplay">25:00</div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div class="pomodoro-buttons">
+                    <button class="btn-start" id="startBtn">START</button>
+                    <button class="btn-reset" id="resetBtn">RESET</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ==================== POMODORO TIMER ====================
+        const MODES = {
+            pomodoro: 25 * 60,
+            shortbreak: 5 * 60,
+            longbreak: 15 * 60
+        };
+
+        let currentMode = 'pomodoro';
+        let timeLeft = MODES.pomodoro;
+        let isRunning = false;
+        let timerInterval = null;
+        let totalTime = MODES.pomodoro;
+
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const progressFill = document.getElementById('progressFill');
+
+        // Format time
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        // Update display
+        function updateDisplay() {
+            timerDisplay.textContent = formatTime(timeLeft);
+            const progress = ((totalTime - timeLeft) / totalTime) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        // Start/Pause timer
+        startBtn.addEventListener('click', () => {
+            if (isRunning) {
+                clearInterval(timerInterval);
+                isRunning = false;
+                startBtn.textContent = 'RESUME';
+                startBtn.classList.remove('paused');
+            } else {
+                isRunning = true;
+                startBtn.textContent = 'PAUSE';
+                startBtn.classList.add('paused');
+
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        startBtn.textContent = 'START';
+                        startBtn.classList.remove('paused');
+                        playNotification();
+                    }
+                }, 1000);
+            }
+        });
+
+        // Reset timer
+        resetBtn.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            isRunning = false;
+            timeLeft = MODES[currentMode];
+            totalTime = MODES[currentMode];
+            updateDisplay();
+            startBtn.textContent = 'START';
+            startBtn.classList.remove('paused');
+        });
+
+        // Mode switching
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (isRunning) {
+                    clearInterval(timerInterval);
+                    isRunning = false;
+                }
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                currentMode = button.dataset.mode;
+                timeLeft = MODES[currentMode];
+                totalTime = MODES[currentMode];
+                updateDisplay();
+                startBtn.textContent = 'START';
+                startBtn.classList.remove('paused');
+            });
+        });
+
+        // Notification sound
+        function playNotification() {
+            // Simple beep sound using Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+
+            oscillator.connect(gain);
+            gain.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+
+            gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        // ==================== TO DO LIST ====================
+        const todoInput = document.getElementById('todoInput');
+        const addTodoBtn = document.getElementById('addTodoBtn');
+        const todoList = document.getElementById('todoList');
+        let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+        // Render todos
+        function renderTodos() {
+            todoList.innerHTML = '';
+
+            if (todos.length === 0) {
+                todoList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">⏱️</div>
+                        <p>No tasks yet. Add one to get started!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            todos.forEach((todo, index) => {
+                const todoItem = document.createElement('div');
+                todoItem.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+                todoItem.innerHTML = `
+                    <span>${todo.text}</span>
+                    <button onclick="deleteTodo(${index})">Delete</button>
+                `;
+                todoItem.addEventListener('click', () => toggleTodo(index), { once: true });
+                todoList.appendChild(todoItem);
+            });
+        }
+
+        // Add todo
+        function addTodo() {
+            const text = todoInput.value.trim();
+            if (text !== '') {
+                todos.push({ text, completed: false });
+                saveTodos();
+                todoInput.value = '';
+                renderTodos();
+            }
+        }
+
+        // Delete todo
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            saveTodos();
+            renderTodos();
+        }
+
+        // Toggle todo
+        function toggleTodo(index) {
+            todos[index].completed = !todos[index].completed;
+            saveTodos();
+            renderTodos();
+        }
+
+        // Save to localStorage
+        function saveTodos() {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        // Event listeners
+        addTodoBtn.addEventListener('click', addTodo);
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTodo();
+        });
+
+        // Initial render
+        renderTodos();
+        updateDisplay();
+        function logout() {
+            if (confirm('هل تريد فعلاً تسجيل الخروج؟')) {
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('username');
+                showAuthModal();
+                document.getElementById('login-form').reset();
+                document.getElementById('signup-form').reset();
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

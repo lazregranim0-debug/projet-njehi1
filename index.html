@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Njehi.tn - نجاحي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 🔐 STYLES LOGIN MODAL */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        .auth-content {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 95%;
+            display: flex;
+            margin: 20px auto;
+        }
+
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            min-height: 500px;
+        }
+
+        .auth-left h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .auth-left p {
+            font-size: 14px;
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .auth-right {
+            flex: 1;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #f8f9fa;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #999;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            font-family: 'Cairo', Arial, sans-serif;
+        }
+
+        .auth-tab.active {
+            color: #222859;
+            border-bottom-color: #00a8ff;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+            font-family: 'Cairo', Arial, sans-serif;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Cairo', Arial, sans-serif;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00a8ff;
+            box-shadow: 0 0 0 3px rgba(0, 168, 255, 0.1);
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle .toggle-icon {
+            position: absolute;
+            left: 12px;
+            top: 38px;
+            cursor: pointer;
+            color: #999;
+            font-size: 18px;
+        }
+
+        .password-toggle input {
+            padding-left: 40px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-family: 'Cairo', Arial, sans-serif;
+        }
+
+        .form-options a {
+            color: #00a8ff;
+            text-decoration: none;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #00a8ff 0%, #0088dd 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Cairo', Arial, sans-serif;
+        }
+
+        .auth-btn:hover {
+            background: linear-gradient(90deg, #0088dd 0%, #0066bb 100%);
+            transform: translateY(-2px);
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            font-family: 'Cairo', Arial, sans-serif;
+        }
+
+        .signup-link a {
+            color: #00a8ff;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            display: none;
+            font-family: 'Cairo', Arial, sans-serif;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            display: none;
+            font-family: 'Cairo', Arial, sans-serif;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        #main-content {
+            display: none;
+        }
+
+        /* Logout button */
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            font-family: 'Cairo', Arial, sans-serif;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #cc0000;
+        }
+
+        .user-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-weight: bold;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .auth-content {
+                flex-direction: column;
+            }
+
+            .auth-left {
+                min-height: 300px;
+                padding: 30px 20px;
+            }
+
+            .auth-right {
+                padding: 30px 20px;
+            }
+
+            .auth-left h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 🔐 LOGIN/SIGNUP MODAL (AFFICHÉ AU DÉMARRAGE) -->
+    <div id="auth-modal" class="auth-modal active">
+        <div class="auth-content">
+            <!-- Left Side -->
+            <div class="auth-left">
+                <div>
+                    <div style="font-size: 100px; margin-bottom: 20px;">📚</div>
+                    <h2>السيت الوحيد لي تستحقو كطالب تونسي</h2>
+                    <p>سايت بش يشجعك على القراءة و يموتيفيك</p>
+                    <p>كل ما تستحقو باش تركز و تقرا و تبعد على الكسل موجود عنا</p>
+                    <p>هدفنا واحد و هو تشجيع الطلبة و تخديمهم و تسهيل الحياة الجامعية و الدراسية</p>
+                </div>
+            </div>
+
+            <!-- Right Side -->
+            <div class="auth-right">
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">تسجيل الدخول</button>
+                    <button class="auth-tab" onclick="switchAuthTab('signup')">إنشاء حساب</button>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <form class="auth-form active" id="login-form" onsubmit="handleLogin(event)">
+                    <div class="error-message" id="login-error"></div>
+                    <div class="success-message" id="login-success"></div>
+
+                    <div class="form-group"> البريد الإلكتروني</label>
+                        <input type="text" id="login-username" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني" required/>
+                    </div>
+
+                    <div class="form-group password-toggle">
+                        <label>كلمة المرور</label>
+                        <input type="password" id="login-password" placeholder="أدخل كلمة المرور" required/>
+                        <span class="toggle-icon" onclick="togglePassword('login-password')">👁️</span>
+                    </div>
+
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox"/> تذكرني
+                        </label>
+                        <a href="#">هل نسيت كلمة المرور؟</a>
+                    </div>
+
+                    <button type="submit" class="auth-btn" id="login-btn">دخول</button>
+
+                    <div class="signup-link">
+                        ليس لديك حساب؟ <a onclick="switchAuthTab('signup')">إنشاء حساب جديد</a>
+                    </div>
+                </form>
+
+                <!-- SIGNUP FORM -->
+                <form class="auth-form" id="signup-form" onsubmit="handleSignup(event)">
+                    <div class="error-message" id="signup-error"></div>
+                    <div class="success-message" id="signup-success"></div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الأول</label>
+                            <input type="text" id="signup-first-name" placeholder="الاسم الأول" required/>
+                        </div>
+                        <div class="form-group">
+                            <label>الاسم الأخير</label>
+                            <input type="text" id="signup-last-name" placeholder="الاسم الأخير" required/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="signup-email" placeholder="أدخل بريدك الإلكتروني" required/>
+                    </div>
+
+                    <div class="form-group password-toggle">
+                        <label>كلمة المرور</label>
+                        <input type="password" id="signup-password" placeholder="أدخل كلمة مرور قوية" required/>
+                        <span class="toggle-icon" onclick="togglePassword('signup-password')">👁️</span>
+                    </div>
+
+                    <div class="form-group password-toggle">
+                        <label>تأكيد كلمة المرور</label>
+                        <input type="password" id="confirm-password" placeholder="أعد إدخال كلمة المرور" required/>
+                        <span class="toggle-icon" onclick="togglePassword('confirm-password')">👁️</span>
+                    </div>
+
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox" id="terms-checkbox" required/> أوافق على الشروط والأحكام
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-btn" id="signup-btn">إنشاء حساب</button>
+
+                    <div class="signup-link">
+                        لديك حساب بالفعل؟ <a onclick="switchAuthTab('login')">تسجيل الدخول</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== MAIN CONTENT (HIDDEN UNTIL LOGIN) =============== -->
+    <div id="main-content">
+        <!-- ============ LOGOUT BUTTON ============ -->
+        <button class="logout-btn" onclick="logout()">تسجيل الخروج 🚪</button>
+        
+
+        <!-- ============ NAVBAR ============ -->
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <img src="images/image3.png" alt="Logo Njehi" />
+                
+            </div>
+            
+
+            <input class="navbar__search" type="text" placeholder="بحث..." />
+            
+            <ul class="navbar__links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="page1.html">ابدا أقرا</a></li>
+                <li><a href="#services">خدمات</a></li>
+                <li><a href="#blog">المزيد</a></li>
+            </ul>
+            <div class="user-info" id="user-info">👋 مرحبا: <span id="username-display"></span></div>
+            
+            <div class="navbar__actions">   
+                <span onclick="logout()" style="cursor: pointer;">👤 تسجيل الخروج</span>
+            </div>
+        </nav>
+
+        <!-- ============ DEV BAR ============ -->
+        <div class="dev-bar">developper par Ranim Lazreg | Rahma Mihdii | Wiem Ouni</div>
+
+        <!-- ============ HERO SECTION ============ -->
+        <section class="hero" id="home">
+            <div class="hero__img">
+                <img src="images/image11.jpg" alt="Etudiant étudiant" />
+            </div>
+            <div class="hero__content">
+                <h1>السيت الوحيد لي تستحقو كطالب تونسي</h1>
+                <p>
+                    سايت بش يشجعك على القراءة و يموتيفيك<br>
+                    كل ما تستحقو باش تركز و تقرا و تبعد على الكسل موجود عنا<br>
+                    هدفنا واحد و هو تشجيع الطلبة و تخديمهم و تسهيل الحياة الجامعية و الدراسية
+                </p>
+                <button onclick="redirectToStudy()" class="cta-btn">وقيت قراية🎓</button>
+            </div>
+        </section>
+
+        <!-- ============ SERVICES GRID ============ -->
+        <section id="services" style="padding: 2rem 1rem; background: #fff; border-bottom: 1px solid #e5eaf1;">
+            <div style="max-width: 1300px; margin: auto;">
+                <h2 style="text-align: center; color: #17205d; font-size: 1.8rem; margin-bottom: 2rem;">خدماتنا</h2>
+                <div class="blog-grid" style="gap: 1.5rem;">
+                    <!-- Service 1 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #f0f7ff;">
+                            <span style="font-size: 60px;">✓</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>To Do List</h3>
+                            <p>تعاونك ترتب أولوياتك و تخليك تخدم بطريقة منظمة</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #fff0f5;">
+                            <span style="font-size: 60px;">🍅</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Pomodoro Timer</h3>
+                            <p>يخليك ما تلهيش تركز وتبقى متحفز</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #f5f0ff;">
+                            <span style="font-size: 60px;">📺</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Study With Me Videos</h3>
+                            <p>فيديوات بومودورو باش تراجع و إنت متحفز</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #fff8f0;">
+                            <span style="font-size: 60px;">📝</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>مقالات</h3>
+                            <p>على مواضيع متنوعة</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #f0fff5;">
+                            <span style="font-size: 60px;">💰</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Budget Calculator</h3>
+                            <p>نظم مصروفك، وتحكم في فلوسك</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #fff5f0;">
+                            <span style="font-size: 60px;">🎵</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Ambient Sound Player</h3>
+                            <p>مجموعة واسعة من الأصوات الراقية تخليك مركز</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION ALT ============ -->
+        <section class="section-alt">
+            <div class="section-image">
+                <img src="images/image12.jpg" alt="Trophy et pièces"/>
+            </div>
+            <div class="section-content">
+                <h2>أي خدمة تنجم تعاونك و تسهلك حياتك الجامعية متوفرة عنا</h2>
+                <p>
+                    في موقعنا ، نقدمولك كل ما تحتاجه باش تقرا بطريقة أسهل وأمتع! ✨ سواء كنت تحب تنظم وقتك، تحفظ بسرعة، ولا تخلي القراءة ممتعة، احنا هنا باش نعاونولك ✅
+                </p>
+                <button onclick="redirectToStudy()" class="cta-btn">إبدا اقرا 🎓</button>
+            </div>
+        </section>
+
+        <!-- ============ NEWSLETTER SECTION ============ -->
+        <section class="newsletter-section">
+            <div class="newsletter-box">
+                <h3>📚 خليك على علم بكل ماهو جديد</h3>
+                
+            </div>
+            <div class="newsletter-img-card">
+                <img src="images/image10.jpg" alt="Study evening illustration"/>
+                <div class="newsletter-img-label">من 0% تحفيز إلى 100% إنتاجية</div>
+            </div>
+        </section>
+
+        <p class="newsletter-desc">
+            موجودين ديما باش نعاونك تتعلم عالسلاسة والبساطة 😊 تتطور في المود باش تتشجع و تحب تقرا<br>
+            كل ميزة في السايت عملناها على خاطرك 🎁 
+        </p>
+
+        <!-- ============ BLOG SECTION ============ -->
+        <section class="blog-section" id="blog">
+            <h2>Latest from Blog</h2>
+            <p class="blog-desc">
+                مقالات مؤلفة تساعد الطلبة على تحسين طرق المراجعة، تنظيم الوقت، التحفز على الدراسة، والتغلب على الشتات
+            </p>
+
+            <!-- Blog Grid 1 -->
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="images/image4.jpg" alt="Choufli Hal" />
+                    <div class="blog-card-content">
+                        <span class="blog-badge quiz">quiz</span>
+                        <h3>Quiz Choufli Hal</h3>
+                        <p>!Test your knowledge about the famous Tunisian series</p>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <img src="images/image9.jpg" alt="فوائد النوم بكرا" />
+                    <div class="blog-card-content">
+                        <span class="blog-badge uni">الحياة الجامعية</span>
+                        <h3>فوائد النوم بكرا</h3>
+                        <p>في وقتنا هذا، الضغط على الطلبة وَلّى كثير؛ قراءه امتحانات، قلق، وسبر...</p>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <img src="images/image6.jpg" alt="E7seb moyenne" />
+                    <div class="blog-card-content">
+                        <span class="blog-badge study">القراية</span>
+                        <h3>E7seb moyenk</h3>
+                        <p>Nchlh bnje7 💙 Calculateur de Moyenne Pondérée</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Grid 2 -->
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="images/image8.jpg" alt="تركيز" />
+                    <div class="blog-card-content">
+                        <span class="blog-badge study">القراية</span>
+                        <h3>كيفاش تقوي في التركيز متاعك وقت القراية</h3>
+                        <p>التركيز من أهم الحاجات الي تقواتك وقت القراية - خاصة في مهمه دراسية.</p>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <img src="images/image7.webp" alt="أصدقاء الجامعة" />
+                    <div class="blog-card-content">
+                        <span class="blog-badge uni">الحياة الجامعية</span>
+                        <h3>كيفاش تعمل صحاب في الفاك</h3>
+                        <p>الفاك تجربة جديدة، عالم آخر فيه برشا وجوه ما تعرفهمش...</p>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <img src="images/image5.jpg" alt="نصائح" />
+                    <div class="blog-card-content">
+                        <span class="blog-badge study">القراية</span>
+                        <h3>نصائح للتركيز أثناء الدراسة</h3>
+                        <p>اكتشف أفضل الطرق للبقاء منتجاً وقت الدراسة والمراجعة</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ FOOTER ============ -->
+        <footer>
+            <div class="footer-grid">
+                <div>
+                    <p>
+                        مانأمن سيبت عاونك باش تعاودك باش تقرا ارجع، احنا <br>
+                        عبارة على صاحبك إلي تقرا معاه. و إلي يعاونك باش توصل لأهدافك متاعك.
+                    </p>
+                    <a href="#" onclick="logout()">Log out</a>
+                </div>
+
+                <div>
+                    <h4>NJEHI PRO</h4>
+                    <ul>
+                        <li>Njehi Study Games</li>
+                        <li>Study Streak</li>
+                        <li>Study Challenge Wheel</li>
+                        <li>Masrouf Tracker</li>
+                        <li>Weekly Studied Hours</li>
+                        <li>Calendar</li>
+                        <li>Mood Tracker</li>
+                        <li>Semester Countdown</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>STUDY NOW</h4>
+                    <ul>
+                        <li><a href="page1.html">وقيت قراية </a></li>
+                        <li>Pomodoro</li>
+                        <li>To Do List</li>
+                        <li>Study videos</li>
+                        <li>Sound Player</li>
+                        <li>A3ml Qahwa</li>
+                        <li>Flipclock</li>
+                        <li>Njehi Coins</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>SITE MENU</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="page1.html">Study Now</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>CONTACT US</h4>
+                    <p>عندك سؤال ولا تستحق مساعدة <a href="#">تواصل معنا</a></p>
+                    <p>contact@njehi.tn</p>
+            </div>
+
+            <div class="copyright">Copyright © 2026 -developed by   Ranim Lazreg | Wiem Ouni | Rahma Mihdi</div>
+        </footer>
+    </div>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script>
+        // ✅ VÉRIFIER LA CONNEXION AU DÉMARRAGE
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('auth_token');
+            const username = localStorage.getItem('username');
+            
+            if (token && username) {
+                // ✅ Utilisateur connecté
+                showMainContent(username);
+            } else {
+                // ❌ Utilisateur non connecté - afficher login
+                showAuthModal();
+            }
+        });
+
+        function showMainContent(username) {
+            document.getElementById('auth-modal').classList.remove('active');
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('user-info').style.display = 'block';
+            document.getElementById('username-display').textContent = username;
+        }
+
+        function showAuthModal() {
+            document.getElementById('auth-modal').classList.add('active');
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('user-info').style.display = 'none';
+        }
+
+        // Basculer entre login et signup
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.auth-tab').forEach(tabBtn => {
+                tabBtn.classList.remove('active');
+            });
+            
+            document.getElementById(tab + '-form').classList.add('active');
+            event.target.classList.add('active');
+            
+            // Effacer les messages
+            document.getElementById(tab + '-error').innerHTML = '';
+            document.getElementById(tab + '-error').classList.remove('show');
+            document.getElementById(tab + '-success').innerHTML = '';
+            document.getElementById(tab + '-success').classList.remove('show');
+        }
+
+        // Afficher/Masquer le mot de passe
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = event.target;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                icon.textContent = '👁️';
+            }
+        }
+
+        // 🔥 LOGIN
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const loginBtn = document.getElementById('login-btn');
+            const errorDiv = document.getElementById('login-error');
+            const successDiv = document.getElementById('login-success');
+            
+            errorDiv.innerHTML = '';
+            errorDiv.classList.remove('show');
+            successDiv.innerHTML = '';
+            successDiv.classList.remove('show');
+            
+            if (!username || !password) {
+                errorDiv.innerHTML = '❌ الرجاء ملء جميع الحقول';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'جاري التحقق...';
+            
+            try {
+                const response = await fetch('api/login.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username_or_email: username,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // ✅ Enregistrer les données
+                    localStorage.setItem('auth_token', data.token);
+                    localStorage.setItem('username', data.username);
+                    
+                    successDiv.innerHTML = '✅ ' + data.message;
+                    successDiv.classList.add('show');
+                    
+                    setTimeout(() => {
+                        showMainContent(data.username);
+                        document.getElementById('login-form').reset();
+                    }, 1000);
+                } else {
+                    errorDiv.innerHTML = '❌ ' + (data.message || 'خطأ في الاتصال');
+                    errorDiv.classList.add('show');
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'دخول';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorDiv.innerHTML = '❌ خطأ في الاتصال بالخادم';
+                errorDiv.classList.add('show');
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'دخول';
+            }
+        }
+
+        // 🔥 SIGNUP
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('signup-first-name').value.trim();
+            const lastName = document.getElementById('signup-last-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const username = document.getElementById('signup-username').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const terms = document.getElementById('terms-checkbox').checked;
+            const signupBtn = document.getElementById('signup-btn');
+            const errorDiv = document.getElementById('signup-error');
+            const successDiv = document.getElementById('signup-success');
+            
+            errorDiv.innerHTML = '';
+            errorDiv.classList.remove('show');
+            successDiv.innerHTML = '';
+            successDiv.classList.remove('show');
+            
+            if (!firstName || !lastName || !email || !username || !password || !confirmPassword) {
+                errorDiv.innerHTML = '❌ جميع الحقول مطلوبة';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                errorDiv.innerHTML = '❌ كلمات المرور غير متطابقة';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            if (!terms) {
+                errorDiv.innerHTML = '❌ يجب قبول الشروط والأحكام';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            signupBtn.disabled = true;
+            signupBtn.textContent = 'جاري الإنشاء...';
+            
+            try {
+                const response = await fetch('api/signup.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        first_name: firstName,
+                        last_name: lastName,
+                        email: email,
+                        username: username,
+                        password: password,
+                        confirm_password: confirmPassword
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // ✅ Enregistrer les données
+                    localStorage.setItem('auth_token', data.token || 'signup_' + Math.random());
+                    localStorage.setItem('username', username);
+                    
+                    successDiv.innerHTML = '🎉 ' + data.message;
+                    successDiv.classList.add('show');
+                    
+                    setTimeout(() => {
+                        showMainContent(username);
+                        document.getElementById('signup-form').reset();
+                    }, 1000);
+                } else {
+                    errorDiv.innerHTML = '❌ ' + (data.message || 'خطأ في الإنشاء');
+                    errorDiv.classList.add('show');
+                    signupBtn.disabled = false;
+                    signupBtn.textContent = 'إنشاء حساب';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorDiv.innerHTML = '❌ خطأ في الاتصال بالخادم';
+                errorDiv.classList.add('show');
+                signupBtn.disabled = false;
+                signupBtn.textContent = 'إنشاء حساب';
+            }
+        }
+
+        // 🔴 DÉCONNEXION
+        function logout() {
+            if (confirm('هل تريد فعلاً تسجيل الخروج؟')) {
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('username');
+                showAuthModal();
+                document.getElementById('login-form').reset();
+                document.getElementById('signup-form').reset();
+            }
+        }
+
+        // Redirection vers page d'étude
+        function redirectToStudy() {
+            window.location.href = "page1.html";
+        }
+    </script>
+</body>
+</html>
