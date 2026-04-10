@@ -320,7 +320,7 @@
                 <div>
                     <div style="font-size: 100px; margin-bottom: 20px;">📚</div>
                     <h2>السيت الوحيد لي تستحقو كطالب تونسي</h2>
-                    <p>سايت بش يشجعك على القراءة و يموتيفيك</p>
+                    <p>سيت بش يشجعك على القراءة و يموتيفيك</p>
                     <p>كل ما تستحقو باش تركز و تقرا و تبعد على الكسل موجود عنا</p>
                     <p>هدفنا واحد و هو تشجيع الطلبة و تخديمهم و تسهيل الحياة الجامعية و الدراسية</p>
                 </div>
@@ -577,21 +577,18 @@
                 مقالات مؤلفة تساعد الطلبة على تحسين طرق المراجعة، تنظيم الوقت، التحفز على الدراسة، والتغلب على الشتات
             </p>
 
-                        <!-- Blog Grid 1 -->
+            <!-- Blog Grid 1 -->
             <div class="blog-grid">
                 <div class="blog-card">
                     <img src="images/image4.jpg" alt="Choufli Hal" />
                     <div class="blog-card-content">
                         <span class="blog-badge quiz">quiz</span>
-                        <div class="card" onclick="window.location.href='quiz.html'">
-                            <span class="tag tag-purple">quiz</span>
-                            <a href="quiz.html" class="card">
-                                <a href="quiz.html" class="card">
-                            <h3>Quiz Choufli Hal</h3></a>
-                            <p>Test your knowledge 🔥</p>
+                        <div class="blog-card-image" onclick="window.location.href='quiz.html'">
+                            <span class=""tag tag-purpule">quiz</span>
+                            <a href="quiz.html" class=""card"></a>
+                            <a href="quiz.html" class=""card"><h3>Quiz Choufli Hal</h3></a>
+                            <p>!Test your knowledge about the famous Tunisian series</p>
                         </div>
-                
-                        <p>!Test your knowledge about the famous Tunisian series</p>
                     </div>
                 </div>
 
@@ -603,61 +600,26 @@
                         <h3>فوائد النوم بكرا</h3></a>
                          <p>تعرف كيفاش النوم يعاونك تقرا خير</p>
                     </div>
-                        <p>في وقتنا هذا، الضغط على الطلبة وَلّى كثير؛ قراءه امتحانات، قلق، وسبر...</p>
+                    <p>في وقتنا هذا، الضغط على الطلبة وَلّى كثير؛ قراءه امتحانات، قلق، وسبر...</p>
                 </div>
-               
+                    
 
                 <div class="blog-card">
                     <img src="images/image6.jpg" alt="E7seb moyenne" />
-                    
                     <div class="card" onclick="window.location.href='moyenne.html'">
                         <span class="tag tag-blue">القراية</span>
                         <a href="moyenne.html" class="card">
                         <h3>E7seb moyenk</h3></a>
                          <p>Calculateur de Moyenne Pondérée</p>
-                    </div></a>
-                    
-                        <p>Nchlh bnje7 💙 Calculateur de Moyenne Pondérée</p>
-                </div>
-                
-            <!-- Blog Grid 2 -->
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <img src="images/image8.jpg" alt="تركيز" />
-                    <a href="wi.html" class="card">
-                         <span class="btn">القراءة</span>
-                          <h2>كيفاش تقوي في التركيز متاعك وقت القراية</h2>    </a>
-                          <p class="desc">
-                             التركيز من أهم الحاجات اللي تقواتك وقت القراية خاصة في مهمة دراسية.</p>
-                
-                    
-                        <p>التركيز من أهم الحاجات الي تقواتك وقت القراية - خاصة في مهمه دراسية.</p>
+                    </div>
+                    <p>Nchlh bnje7 💙 Calculateur de Moyenne Pondérée</p>
+                         <p>Calculateur de Moyenne Pondérée</p>
+                    </div>
                 </div>
             </div>
 
-                <div class="blog-card">
-                    <img src="images/image7.webp" alt="أصدقاء الجامعة" />
-                    <div class="card" onclick="window.location.href='friends.html'">
-                        <span class="tag tag-green">الحياة الجامعية</span>
-                        <a href="friends.html" class="card">
-                        <h3>كيفاش تعمل صحاب في الفاك</h3></a>
-                        <p>دليلك باش تكون علاقات باهية 🤝</p>
-                    </div>
-                        <p>الفاك تجربة جديدة، عالم آخر فيه برشا وجوه ما تعرفهمش...</p>
-                
-                </div>
-
-                <div class="blog-card">
-                    <img src="images/image5.jpg" alt="نصائح" />
-                    <div class="card" onclick="window.location.href='focus.html'">
-                        <span class="tag tag-blue">القراية</span>
-                        <a href="focus.html" class="card">
-                        <h3>نصائح للتركيز أثناء الدراسة</h3></a>
-                        <p>كيفاش تولي مركز 100% 💪</p>
-                    </div>
-                        <p>اكتشف أفضل الطرق للبقاء منتجاً وقت الدراسة والمراجعة</p>
-                </div>
-            </section>
+           
+        </section>
 
         <!-- ============ FOOTER ============ -->
         <footer>
@@ -821,17 +783,17 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    // ✅ Enregistrer les données
-                    localStorage.setItem('auth_token', data.token);
-                   
-                    
+                     // ✅ Enregistrer les données
+                     localStorage.setItem('auth_token', data.token);
+                     localStorage.setItem('username', data.username || username); // AJOUTER CETTE LIGNE
+    
                     successDiv.innerHTML = '✅ ' + data.message;
                     successDiv.classList.add('show');
-                    
-                    setTimeout(() => {
-                       
-                        document.getElementById('login-form').reset();
-                    }, 1000);
+    
+                     setTimeout(() => {
+                    showMainContent(username); // AJOUTER CETTE LIGNE
+                    document.getElementById('login-form').reset();
+                     }, 1500);
                 } else {
                     errorDiv.innerHTML = '❌ ' + (data.message || 'خطأ في الاتصال');
                     errorDiv.classList.add('show');
