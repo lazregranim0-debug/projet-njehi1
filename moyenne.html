@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Calcul Moyenne</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+}
+
+input {
+    margin: 5px;
+    padding: 5px;
+    width: 80px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>احسب المعدل متاعك 🎓</h2>
+
+<div id="matieres"></div>
+
+<button onclick="calculerMoyenne()">احسب</button>
+
+<h2 id="resultat"></h2>
+
+<script>
+// إنشاء 12 matières
+const container = document.getElementById("matieres");
+
+for (let i = 1; i <= 12; i++) {
+    container.innerHTML += `
+        <div>
+            مادة ${i} :
+            <input type="number" id="note${i}" placeholder="Note">
+            <input type="number" id="coef${i}" placeholder="Coef">
+        </div>
+    `;
+}
+
+// calcul
+function calculerMoyenne() {
+    let somme = 0;
+    let totalCoef = 0;
+
+    for (let i = 1; i <= 12; i++) {
+        let note = parseFloat(document.getElementById("note" + i).value);
+        let coef = parseFloat(document.getElementById("coef" + i).value);
+
+        if (!isNaN(note) && !isNaN(coef)) {
+            somme += note * coef;
+            totalCoef += coef;
+        }
+    }
+
+    if (totalCoef === 0) {
+        document.getElementById("resultat").innerText = "دخل القيم!";
+        return;
+    }
+
+    let moyenne = somme / totalCoef;
+
+    let res = "Moyenne = " + moyenne.toFixed(2);
+
+    if (moyenne >= 10) res += " ✅ ناجح";
+    else res += " ❌ راسب";
+
+    document.getElementById("resultat").innerText = res;
+}
+</script>
+
+</body>
+</html>

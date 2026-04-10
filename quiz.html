@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Choufli Hal</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f5f7fb;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    cursor: pointer;
+}
+
+.correct {
+    background: #4CAF50;
+    color: white;
+}
+
+.wrong {
+    background: #e74c3c;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2 id="question">سؤال</h2>
+    <div id="answers"></div>
+    <h3 id="result"></h3>
+</div>
+
+<script>
+
+const quiz = [
+    {
+        question: "شكون بطل Choufli Hal؟",
+        answers: ["سليمان الأبيض", "سبوعي", "لزهر"],
+        correct: 1
+    },
+    {
+        question: "وين يخدم سبوعي؟",
+        answers: ["مطعم", "وكالة أسفار", "مقهى"],
+        correct: 1
+    },
+    {
+        question: "شنوا اسم المديرة؟",
+        answers: ["مريم", "جميلة", "حسناء"],
+        correct: 2
+    }
+];
+
+let current = 0;
+let score = 0;
+
+function loadQuestion() {
+    const q = quiz[current];
+    document.getElementById("question").innerText = q.question;
+
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    q.answers.forEach((ans, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = ans;
+
+        btn.onclick = () => checkAnswer(index, btn);
+
+        answersDiv.appendChild(btn);
+    });
+}
+
+function checkAnswer(index, btn) {
+    const correct = quiz[current].correct;
+
+    if (index === correct) {
+        btn.classList.add("correct");
+        score++;
+    } else {
+        btn.classList.add("wrong");
+    }
+
+    setTimeout(() => {
+        current++;
+        if (current < quiz.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }, 800);
+}
+
+function showResult() {
+    document.getElementById("question").innerText = "🎉 انتهى الكويز";
+    document.getElementById("answers").innerHTML = "";
+    document.getElementById("result").innerText =
+        "Score: " + score + " / " + quiz.length;
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

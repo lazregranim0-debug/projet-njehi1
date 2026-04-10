@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Njehi.tn - نجاحي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    
+   
+    <!-- =============== MAIN CONTENT (HIDDEN UNTIL LOGIN) =============== -->
+    <div id="main-content">
+        <!-- ============ LOGOUT BUTTON ============ -->
+        <button class="logout-btn" onclick="logout()">تسجيل الخروج 🚪</button>
+        
+
+        <!-- ============ NAVBAR ============ -->
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <img src="images/image3.png" alt="Logo Njehi" />
+                
+            </div>
+            
+
+            <input class="navbar__search" type="text" placeholder="بحث..." />
+            
+            <ul class="navbar__links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="page1.html">ابدا أقرا</a></li>
+                <li><a href="#services">خدمات</a></li>
+                <li><a href="#blog">المزيد</a></li>
+            </ul>
+            <div class="user-info" id="user-info">👋 مرحبا: <span id="username-display"></span></div>
+            
+            <div class="navbar__actions">   
+                <span onclick="logout()" style="cursor: pointer;">👤 تسجيل الخروج</span>
+            </div>
+        </nav>
+
+        <!-- ============ DEV BAR ============ -->
+        <div class="dev-bar">developper par Ranim Lazreg | Rahma Mihdii | Wiem Ouni</div>
+
+        <!-- ============ HERO SECTION ============ -->
+        <section class="hero" id="home">
+            <div class="hero__img">
+                <img src="images/image11.jpg" alt="Etudiant étudiant" />
+            </div>
+            <div class="hero__content">
+                <h1>السيت الوحيد لي تستحقو كطالب تونسي</h1>
+                <p>
+                    سايت بش يشجعك على القراءة و يموتيفيك<br>
+                    كل ما تستحقو باش تركز و تقرا و تبعد على الكسل موجود عنا<br>
+                    هدفنا واحد و هو تشجيع الطلبة و تخديمهم و تسهيل الحياة الجامعية و الدراسية
+                </p>
+                <button onclick="redirectToStudy()" class="cta-btn">وقيت قراية🎓</button>
+            </div>
+        </section>
+
+        <!-- ============ SERVICES GRID ============ -->
+        <section id="services" style="padding: 2rem 1rem; background: #fff; border-bottom: 1px solid #e5eaf1;">
+            <div style="max-width: 1300px; margin: auto;">
+                <h2 style="text-align: center; color: #17205d; font-size: 1.8rem; margin-bottom: 2rem;">خدماتنا</h2>
+                <div class="blog-grid" style="gap: 1.5rem;">
+                    <!-- Service 1 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #f0f7ff;">
+                            <span style="font-size: 60px;">✓</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>To Do List</h3>
+                            <p>تعاونك ترتب أولوياتك و تخليك تخدم بطريقة منظمة</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #fff0f5;">
+                            <span style="font-size: 60px;">🍅</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Pomodoro Timer</h3>
+                            <p>يخليك ما تلهيش تركز وتبقى متحفز</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #f5f0ff;">
+                            <span style="font-size: 60px;">📺</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Study With Me Videos</h3>
+                            <p>فيديوات بومودورو باش تراجع و إنت متحفز</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #fff8f0;">
+                            <span style="font-size: 60px;">📝</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>مقالات</h3>
+                            <p>على مواضيع متنوعة</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #f0fff5;">
+                            <span style="font-size: 60px;">💰</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Budget Calculator</h3>
+                            <p>نظم مصروفك، وتحكم في فلوسك</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="blog-card" style="max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; background: #fff5f0;">
+                            <span style="font-size: 60px;">🎵</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Ambient Sound Player</h3>
+                            <p>مجموعة واسعة من الأصوات الراقية تخليك مركز</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION ALT ============ -->
+        <section class="section-alt">
+            <div class="section-image">
+                <img src="images/image12.jpg" alt="Trophy et pièces"/>
+            </div>
+            <div class="section-content">
+                <h2>أي خدمة تنجم تعاونك و تسهلك حياتك الجامعية متوفرة عنا</h2>
+                <p>
+                    في موقعنا ، نقدمولك كل ما تحتاجه باش تقرا بطريقة أسهل وأمتع! ✨ سواء كنت تحب تنظم وقتك، تحفظ بسرعة، ولا تخلي القراءة ممتعة، احنا هنا باش نعاونولك ✅
+                </p>
+                <button onclick="redirectToStudy()" class="cta-btn">إبدا اقرا 🎓</button>
+            </div>
+        </section>
+
+        <!-- ============ NEWSLETTER SECTION ============ -->
+        <section class="newsletter-section">
+            <div class="newsletter-box">
+                <h3>📚 خليك على علم بكل ماهو جديد</h3>
+                
+            </div>
+            <div class="newsletter-img-card">
+                <img src="images/image10.jpg" alt="Study evening illustration"/>
+                <div class="newsletter-img-label">من 0% تحفيز إلى 100% إنتاجية</div>
+            </div>
+        </section>
+
+        <p class="newsletter-desc">
+            موجودين ديما باش نعاونك تتعلم عالسلاسة والبساطة 😊 تتطور في المود باش تتشجع و تحب تقرا<br>
+            كل ميزة في السايت عملناها على خاطرك 🎁 
+        </p>
+
+        <!-- ============ BLOG SECTION ============ -->
+        <section class="blog-section" id="blog">
+            <h2>Latest from Blog</h2>
+            <p class="blog-desc">
+                مقالات مؤلفة تساعد الطلبة على تحسين طرق المراجعة، تنظيم الوقت، التحفز على الدراسة، والتغلب على الشتات
+            </p>
+
+            <!-- Blog Grid 1 -->
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="images/image4.jpg" alt="Choufli Hal" />
+                    <div class="blog-card-content">
+                        <span class="blog-badge quiz">quiz</span>
+                        <div class="card" onclick="window.location.href='quiz.html'">
+                            <span class="tag tag-purple">quiz</span>
+                            <a href="quiz.html" class="card">
+                                <a href="quiz.html" class="card">
+                            <h3>Quiz Choufli Hal</h3></a>
+                            <p>Test your knowledge 🔥</p>
+                        </div>
+                
+                        <p>!Test your knowledge about the famous Tunisian series</p>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <img src="images/image9.jpg" alt="فوائد النوم بكرا" />
+                    <div class="card" onclick="window.location.href='sleep.html'">
+                        <span class="tag tag-green">الحياة الجامعية</span>
+                        <a href="sleep.html" class="card">
+                        <h3>فوائد النوم بكرا</h3></a>
+                         <p>تعرف كيفاش النوم يعاونك تقرا خير</p>
+                    </div>
+                        <p>في وقتنا هذا، الضغط على الطلبة وَلّى كثير؛ قراءه امتحانات، قلق، وسبر...</p>
+                </div>
+               
+
+                <div class="blog-card">
+                    <img src="images/image6.jpg" alt="E7seb moyenne" />
+                    
+                    <div class="card" onclick="window.location.href='moyenne.html'">
+                        <span class="tag tag-blue">القراية</span>
+                        <a href="moyenne.html" class="card">
+                        <h3>E7seb moyenk</h3></a>
+                         <p>Calculateur de Moyenne Pondérée</p>
+                    </div></a>
+                    
+                        <p>Nchlh bnje7 💙 Calculateur de Moyenne Pondérée</p>
+                </div>
+                
+            <!-- Blog Grid 2 -->
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="images/image8.jpg" alt="تركيز" />
+                    <a href="wi.html" class="card">
+                         <span class="btn">القراءة</span>
+                          <h2>كيفاش تقوي في التركيز متاعك وقت القراية</h2>    </a>
+                          <p class="desc">
+                             التركيز من أهم الحاجات اللي تقواتك وقت القراية خاصة في مهمة دراسية.</p>
+                
+                    
+                        <p>التركيز من أهم الحاجات الي تقواتك وقت القراية - خاصة في مهمه دراسية.</p>
+                </div>
+            </div>
+
+                <div class="blog-card">
+                    <img src="images/image7.webp" alt="أصدقاء الجامعة" />
+                    <div class="card" onclick="window.location.href='friends.html'">
+                        <span class="tag tag-green">الحياة الجامعية</span>
+                        <a href="friends.html" class="card">
+                        <h3>كيفاش تعمل صحاب في الفاك</h3></a>
+                        <p>دليلك باش تكون علاقات باهية 🤝</p>
+                    </div>
+                        <p>الفاك تجربة جديدة، عالم آخر فيه برشا وجوه ما تعرفهمش...</p>
+                
+                </div>
+
+                <div class="blog-card">
+                    <img src="images/image5.jpg" alt="نصائح" />
+                    <div class="card" onclick="window.location.href='focus.html'">
+                        <span class="tag tag-blue">القراية</span>
+                        <a href="focus.html" class="card">
+                        <h3>نصائح للتركيز أثناء الدراسة</h3></a>
+                        <p>كيفاش تولي مركز 100% 💪</p>
+                    </div>
+                        <p>اكتشف أفضل الطرق للبقاء منتجاً وقت الدراسة والمراجعة</p>
+                </div>
+            </section>
+
+        <!-- ============ FOOTER ============ -->
+        <footer>
+            <div class="footer-grid">
+                <div>
+                    <p>
+                        مانأمن سيبت عاونك باش تعاودك باش تقرا ارجع، احنا <br>
+                        عبارة على صاحبك إلي تقرا معاه. و إلي يعاونك باش توصل لأهدافك متاعك.
+                    </p>
+                    <a href="#" onclick="logout()">Log out</a>
+                </div>
+
+                <div>
+                    <h4>NJEHI PRO</h4>
+                    <ul>
+                        <li>Njehi Study Games</li>
+                        <li>Study Streak</li>
+                        <li>Study Challenge Wheel</li>
+                        <li>Masrouf Tracker</li>
+                        <li>Weekly Studied Hours</li>
+                        <li>Calendar</li>
+                        <li>Mood Tracker</li>
+                        <li>Semester Countdown</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>STUDY NOW</h4>
+                    <ul>
+                        <li><a href="page1.html">وقيت قراية </a></li>
+                        <li>Pomodoro</li>
+                        <li>To Do List</li>
+                        <li>Study videos</li>
+                        <li>Sound Player</li>
+                        <li>A3ml Qahwa</li>
+                        <li>Flipclock</li>
+                        <li>Njehi Coins</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>SITE MENU</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="page1.html">Study Now</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>CONTACT US</h4>
+                    <p>عندك سؤال ولا تستحق مساعدة <a href="#">تواصل معنا</a></p>
+                    <p>contact@njehi.tn</p>
+            </div>
+
+            <div class="copyright">Copyright © 2026 -developed by   Ranim Lazreg | Wiem Ouni | Rahma Mihdi</div>
+        </footer>
+    </div>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script>
+        // ✅ VÉRIFIER LA CONNEXION AU DÉMARRAGE
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('auth_token');
+            const username = localStorage.getItem('username');
+            
+            if (token && username) {
+                // ✅ Utilisateur connecté
+                showMainContent(username);
+            } else {
+                // ❌ Utilisateur non connecté - afficher login
+                showAuthModal();
+            }
+        });
+
+        function showMainContent(username) {
+            document.getElementById('auth-modal').classList.remove('active');
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('user-info').style.display = 'block';
+            document.getElementById('username-display').textContent = username;
+        }
+
+        function showAuthModal() {
+            document.getElementById('auth-modal').classList.add('active');
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('user-info').style.display = 'none';
+        }
+
+        // Basculer entre login et signup
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.auth-tab').forEach(tabBtn => {
+                tabBtn.classList.remove('active');
+            });
+            
+            document.getElementById(tab + '-form').classList.add('active');
+            event.target.classList.add('active');
+            
+            // Effacer les messages
+            document.getElementById(tab + '-error').innerHTML = '';
+            document.getElementById(tab + '-error').classList.remove('show');
+            document.getElementById(tab + '-success').innerHTML = '';
+            document.getElementById(tab + '-success').classList.remove('show');
+        }
+
+        // Afficher/Masquer le mot de passe
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = event.target;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                icon.textContent = '👁️';
+            }
+        }
+
+        // 🔥 LOGIN
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const loginBtn = document.getElementById('login-btn');
+            const errorDiv = document.getElementById('login-error');
+            const successDiv = document.getElementById('login-success');
+            
+            errorDiv.innerHTML = '';
+            errorDiv.classList.remove('show');
+            successDiv.innerHTML = '';
+            successDiv.classList.remove('show');
+            
+            if (!username || !password) {
+                errorDiv.innerHTML = '❌ الرجاء ملء جميع الحقول';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'جاري التحقق...';
+            
+            try {
+                const response = await fetch('api/login.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username_or_email: username,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // ✅ Enregistrer les données
+                    localStorage.setItem('auth_token', data.token);
+                    localStorage.setItem('username', data.username);
+                    
+                    successDiv.innerHTML = '✅ ' + data.message;
+                    successDiv.classList.add('show');
+                    
+                    setTimeout(() => {
+                        showMainContent(data.username);
+                        document.getElementById('login-form').reset();
+                    }, 1000);
+                } else {
+                    errorDiv.innerHTML = '❌ ' + (data.message || 'خطأ في الاتصال');
+                    errorDiv.classList.add('show');
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'دخول';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorDiv.innerHTML = '❌ خطأ في الاتصال بالخادم';
+                errorDiv.classList.add('show');
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'دخول';
+            }
+        }
+
+        // 🔥 SIGNUP
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('signup-first-name').value.trim();
+            const lastName = document.getElementById('signup-last-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const username = document.getElementById('signup-username').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const terms = document.getElementById('terms-checkbox').checked;
+            const signupBtn = document.getElementById('signup-btn');
+            const errorDiv = document.getElementById('signup-error');
+            const successDiv = document.getElementById('signup-success');
+            
+            errorDiv.innerHTML = '';
+            errorDiv.classList.remove('show');
+            successDiv.innerHTML = '';
+            successDiv.classList.remove('show');
+            
+            if (!firstName || !lastName || !email || !username || !password || !confirmPassword) {
+                errorDiv.innerHTML = '❌ جميع الحقول مطلوبة';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                errorDiv.innerHTML = '❌ كلمات المرور غير متطابقة';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            if (!terms) {
+                errorDiv.innerHTML = '❌ يجب قبول الشروط والأحكام';
+                errorDiv.classList.add('show');
+                return;
+            }
+            
+            signupBtn.disabled = true;
+            signupBtn.textContent = 'جاري الإنشاء...';
+            
+            try {
+                const response = await fetch('api/signup.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        first_name: firstName,
+                        last_name: lastName,
+                        email: email,
+                        username: username,
+                        password: password,
+                        confirm_password: confirmPassword
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // ✅ Enregistrer les données
+                    localStorage.setItem('auth_token', data.token || 'signup_' + Math.random());
+                    localStorage.setItem('username', username);
+                    
+                    successDiv.innerHTML = '🎉 ' + data.message;
+                    successDiv.classList.add('show');
+                    
+                    setTimeout(() => {
+                        showMainContent(username);
+                        document.getElementById('signup-form').reset();
+                    }, 1000);
+                } else {
+                    errorDiv.innerHTML = '❌ ' + (data.message || 'خطأ في الإنشاء');
+                    errorDiv.classList.add('show');
+                    signupBtn.disabled = false;
+                    signupBtn.textContent = 'إنشاء حساب';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorDiv.innerHTML = '❌ خطأ في الاتصال بالخادم';
+                errorDiv.classList.add('show');
+                signupBtn.disabled = false;
+                signupBtn.textContent = 'إنشاء حساب';
+            }
+        }
+
+        // 🔴 DÉCONNEXION
+        function logout() {
+            if (confirm('هل تريد فعلاً تسجيل الخروج؟')) {
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('username');
+                showAuthModal();
+                document.getElementById('login-form').reset();
+                document.getElementById('signup-form').reset();
+            }
+        }
+
+        // Redirection vers page d'étude
+        function redirectToStudy() {
+            window.location.href = "page1.html";
+        }
+    </script>
+</body>
+</html>
