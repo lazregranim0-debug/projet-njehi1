@@ -378,6 +378,11 @@
                             <input type="text" id="signup-last-name" placeholder="الاسم الأخير" required/>
                         </div>
                     </div>
+                     <div class="form-group">
+                        <label>اسم المستخدم</label>
+                        <input type="text" id="signup-username" placeholder="أدخل اسم المستخدم" required/>
+                    </div>
+
 
                     <div class="form-group">
                         <label>البريد الإلكتروني</label>
@@ -572,66 +577,87 @@
                 مقالات مؤلفة تساعد الطلبة على تحسين طرق المراجعة، تنظيم الوقت، التحفز على الدراسة، والتغلب على الشتات
             </p>
 
-            <!-- Blog Grid 1 -->
+                        <!-- Blog Grid 1 -->
             <div class="blog-grid">
                 <div class="blog-card">
                     <img src="images/image4.jpg" alt="Choufli Hal" />
                     <div class="blog-card-content">
                         <span class="blog-badge quiz">quiz</span>
-                        <h3>Quiz Choufli Hal</h3>
+                        <div class="card" onclick="window.location.href='quiz.html'">
+                            <span class="tag tag-purple">quiz</span>
+                            <a href="quiz.html" class="card">
+                                <a href="quiz.html" class="card">
+                            <h3>Quiz Choufli Hal</h3></a>
+                            <p>Test your knowledge 🔥</p>
+                        </div>
+                
                         <p>!Test your knowledge about the famous Tunisian series</p>
                     </div>
                 </div>
 
                 <div class="blog-card">
                     <img src="images/image9.jpg" alt="فوائد النوم بكرا" />
-                    <div class="blog-card-content">
-                        <span class="blog-badge uni">الحياة الجامعية</span>
-                        <h3>فوائد النوم بكرا</h3>
-                        <p>في وقتنا هذا، الضغط على الطلبة وَلّى كثير؛ قراءه امتحانات، قلق، وسبر...</p>
+                    <div class="card" onclick="window.location.href='sleep.html'">
+                        <span class="tag tag-green">الحياة الجامعية</span>
+                        <a href="sleep.html" class="card">
+                        <h3>فوائد النوم بكرا</h3></a>
+                         <p>تعرف كيفاش النوم يعاونك تقرا خير</p>
                     </div>
+                        <p>في وقتنا هذا، الضغط على الطلبة وَلّى كثير؛ قراءه امتحانات، قلق، وسبر...</p>
                 </div>
+               
 
                 <div class="blog-card">
                     <img src="images/image6.jpg" alt="E7seb moyenne" />
-                    <div class="blog-card-content">
-                        <span class="blog-badge study">القراية</span>
-                        <h3>E7seb moyenk</h3>
+                    
+                    <div class="card" onclick="window.location.href='moyenne.html'">
+                        <span class="tag tag-blue">القراية</span>
+                        <a href="moyenne.html" class="card">
+                        <h3>E7seb moyenk</h3></a>
+                         <p>Calculateur de Moyenne Pondérée</p>
+                    </div></a>
+                    
                         <p>Nchlh bnje7 💙 Calculateur de Moyenne Pondérée</p>
-                    </div>
                 </div>
-            </div>
-
+                
             <!-- Blog Grid 2 -->
             <div class="blog-grid">
                 <div class="blog-card">
                     <img src="images/image8.jpg" alt="تركيز" />
-                    <div class="blog-card-content">
-                        <span class="blog-badge study">القراية</span>
-                        <h3>كيفاش تقوي في التركيز متاعك وقت القراية</h3>
+                    <a href="wi.html" class="card">
+                         <span class="btn">القراءة</span>
+                          <h2>كيفاش تقوي في التركيز متاعك وقت القراية</h2>    </a>
+                          <p class="desc">
+                             التركيز من أهم الحاجات اللي تقواتك وقت القراية خاصة في مهمة دراسية.</p>
+                
+                    
                         <p>التركيز من أهم الحاجات الي تقواتك وقت القراية - خاصة في مهمه دراسية.</p>
-                    </div>
                 </div>
+            </div>
 
                 <div class="blog-card">
                     <img src="images/image7.webp" alt="أصدقاء الجامعة" />
-                    <div class="blog-card-content">
-                        <span class="blog-badge uni">الحياة الجامعية</span>
-                        <h3>كيفاش تعمل صحاب في الفاك</h3>
-                        <p>الفاك تجربة جديدة، عالم آخر فيه برشا وجوه ما تعرفهمش...</p>
+                    <div class="card" onclick="window.location.href='friends.html'">
+                        <span class="tag tag-green">الحياة الجامعية</span>
+                        <a href="friends.html" class="card">
+                        <h3>كيفاش تعمل صحاب في الفاك</h3></a>
+                        <p>دليلك باش تكون علاقات باهية 🤝</p>
                     </div>
+                        <p>الفاك تجربة جديدة، عالم آخر فيه برشا وجوه ما تعرفهمش...</p>
+                
                 </div>
 
                 <div class="blog-card">
                     <img src="images/image5.jpg" alt="نصائح" />
-                    <div class="blog-card-content">
-                        <span class="blog-badge study">القراية</span>
-                        <h3>نصائح للتركيز أثناء الدراسة</h3>
-                        <p>اكتشف أفضل الطرق للبقاء منتجاً وقت الدراسة والمراجعة</p>
+                    <div class="card" onclick="window.location.href='focus.html'">
+                        <span class="tag tag-blue">القراية</span>
+                        <a href="focus.html" class="card">
+                        <h3>نصائح للتركيز أثناء الدراسة</h3></a>
+                        <p>كيفاش تولي مركز 100% 💪</p>
                     </div>
+                        <p>اكتشف أفضل الطرق للبقاء منتجاً وقت الدراسة والمراجعة</p>
                 </div>
-            </div>
-        </section>
+            </section>
 
         <!-- ============ FOOTER ============ -->
         <footer>
@@ -797,13 +823,13 @@
                 if (data.success) {
                     // ✅ Enregistrer les données
                     localStorage.setItem('auth_token', data.token);
-                    localStorage.setItem('username', data.username);
+                   
                     
                     successDiv.innerHTML = '✅ ' + data.message;
                     successDiv.classList.add('show');
                     
                     setTimeout(() => {
-                        showMainContent(data.username);
+                       
                         document.getElementById('login-form').reset();
                     }, 1000);
                 } else {
@@ -921,5 +947,6 @@
             window.location.href = "page1.html";
         }
     </script>
+    
 </body>
 </html>
