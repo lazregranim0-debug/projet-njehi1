@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study with Me </title>
+    <title>Study with Me</title>
     <style>
+        /* [VOTRE CSS RESTE IDENTIQUE - JE NE VAIS PAS LE RÉPÉTER] */
         * {
             margin: 0;
             padding: 0;
@@ -59,20 +60,6 @@
             color: #00a8e8;
         }
 
-        .nav-menu a.active {
-            color: #00a8e8;
-            border-bottom: 2px solid #00a8e8;
-            padding-bottom: 5px;
-        }
-
-        .login-btn {
-            background: none;
-            border: none;
-            color: #333;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
         /* Container Principal */
         .container {
             display: flex;
@@ -85,6 +72,8 @@
             width: 300px;
             padding: 30px 20px;
             background: rgba(255, 255, 255, 0.1);
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
         }
 
         .sidebar-title {
@@ -117,11 +106,6 @@
             color: #0080b8;
         }
 
-        .sidebar-menu a.active {
-            font-weight: bold;
-            color: #000;
-        }
-
         /* Main Content */
         .main-content {
             flex: 1;
@@ -129,6 +113,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
         }
 
         /* Card */
@@ -165,7 +151,6 @@
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 14px;
-            transition: border-color 0.3s;
         }
 
         .todo-input-container input:focus {
@@ -284,10 +269,6 @@
             transition: transform 0.3s;
         }
 
-        .settings-icon:hover {
-            transform: rotate(20deg);
-        }
-
         .pomodoro-tabs {
             display: flex;
             gap: 10px;
@@ -354,10 +335,6 @@
             transform: scale(1.05);
         }
 
-        .btn-start.paused {
-            background: #4caf50;
-        }
-
         .btn-reset {
             background: #999;
             min-width: 120px;
@@ -384,6 +361,312 @@
             transition: width 0.1s linear;
         }
 
+        /* MEDIA SECTIONS */
+        .media-section {
+            grid-column: 1 / -1;
+        }
+
+        .media-section h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 28px;
+            border-bottom: 3px solid #00a8e8;
+            padding-bottom: 10px;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .media-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .media-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .media-card-title {
+            font-weight: 700;
+            color: #00a8e8;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* AUDIO CONTROLS */
+        .audio-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-play, .btn-pause, .btn-stop, .btn-add-playlist, .btn-download {
+            flex: 1;
+            min-width: 40px;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            background: #00a8e8;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .btn-play:hover, .btn-pause:hover, .btn-stop:hover {
+            background: #0080b8;
+        }
+
+        .btn-add-playlist {
+            background: #4caf50;
+        }
+
+        .btn-add-playlist:hover {
+            background: #45a049;
+        }
+
+        .btn-download {
+            background: #ff9800;
+        }
+
+        .btn-download:hover {
+            background: #e68900;
+        }
+
+        /* VIDEO THUMBNAIL */
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 3px solid white;
+        }
+
+        .video-thumbnail:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+
+        /* VIDEO ACTIONS */
+        .video-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-watch {
+            flex: 1;
+            padding: 10px;
+            background: #00a8e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* MODAL */
+        .media-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content.modal-large {
+            max-width: 1000px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .modal-content h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-video {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .video-info {
+            margin: 20px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-favorite, .btn-share, .btn-download-modal {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: white;
+        }
+
+        .btn-favorite {
+            background: #ff6b6b;
+        }
+
+        .btn-share {
+            background: #00a8e8;
+        }
+
+        .btn-download-modal {
+            background: #ff9800;
+        }
+
+        /* NOTIFICATION */
+        .notification {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: bottom 0.3s;
+            z-index: 3000;
+            font-weight: 500;
+        }
+
+        .notification.show {
+            bottom: 20px;
+        }
+
+        /* MEDIA HEADER */
+        .media-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .media-title {
+            font-weight: 700;
+            color: #00a8e8;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .favorite-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .media-meta, .media-duration {
+            font-size: 12px;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .audio-player {
+            width: 100%;
+            height: 40px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .main-content {
@@ -398,17 +681,9 @@
             .sidebar {
                 display: none;
             }
-
-            .container {
-                flex-direction: column;
-            }
         }
 
         @media (max-width: 768px) {
-            nav {
-                padding: 15px 20px;
-            }
-
             .nav-menu {
                 gap: 15px;
             }
@@ -426,43 +701,26 @@
             .card {
                 padding: 20px;
             }
-        }
 
-        /* Scrollbar */
-        .todo-list::-webkit-scrollbar {
-            width: 8px;
-        }
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
 
-        .todo-list::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
+            .modal-video {
+                height: 400px;
+            }
         }
-
-        .todo-list::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-
-        .todo-list::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">
-            🎓 NAJEHI
-        </div>
+        <div class="logo">🎓 NAJEHI</div>
         <div class="nav-menu">
             <a href="index.html" class="active">Home</a>
             <a href="index.html#services">Services</a>
             <a href="index.html#blog">More</a>
-             
-             <a href="index.html" onclick="logout()">Logout👤</a>
-             
-       
+            <a href="index.html" onclick="logout()">Logout👤</a>
         </div>
     </nav>
 
@@ -472,35 +730,20 @@
         <aside class="sidebar">
             <h3 class="sidebar-title">Study with me Menu</h3>
             <ul class="sidebar-menu">
-                <li><a href="#" class="active">Pomodoro timer</a></li>
-                <li><a href="#">To do list</a></li>
-                <li><a href="#">A3ml qahwa</a></li>
-                <li><a href="#">Ambient sound player</a></li>
-                <li><a href="#">Flipclock</a></li>
-                <li><a href="#">Scientific calculator</a></li>
-                <li><a href="#">Study With Me Videos Gallery</a></li>
-                <li><a href="#">Taleb coins</a></li>
-                <li><a href="#">Brain games</a></li>
-                <li><a href="#">taleb pro</a></li>
-                <li><a href="#">Taleb study games</a></li>
-                <li><a href="#">Study streak</a></li>
-                <li><a href="#">Study challenge wheel</a></li>
-                <li><a href="#">Masrouf tracker</a></li>
-                <li><a href="#">Weekly studied hours</a></li>
+                <li><a href="#pomodoro">Pomodoro timer</a></li>
+                <li><a href="#todo">To do list</a></li>
+                <li><a href="#music">Study Music</a></li>
+                <li><a href="#videos">Study Videos</a></li>
             </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
             <!-- To Do List Card -->
-            <div class="card todo-card">
+            <div class="card todo-card" id="todo">
                 <h2>To Do List</h2>
                 <div class="todo-input-container">
-                    <input 
-                        type="text" 
-                        id="todoInput" 
-                        placeholder="What needs to be done?"
-                    >
+                    <input type="text" id="todoInput" placeholder="What needs to be done?">
                     <button id="addTodoBtn">+</button>
                 </div>
                 <div class="todo-list" id="todoList">
@@ -512,22 +755,16 @@
             </div>
 
             <!-- Pomodoro Card -->
-            <div class="card pomodoro-card">
+            <div class="card pomodoro-card" id="pomodoro">
                 <div class="pomodoro-header">
                     <h2>Pomodoro Timer</h2>
                     <span class="settings-icon">⚙️</span>
                 </div>
 
                 <div class="pomodoro-tabs">
-                    <button class="tab-button active" data-mode="pomodoro">
-                        Pomodoro
-                    </button>
-                    <button class="tab-button" data-mode="shortbreak">
-                        Short Break
-                    </button>
-                    <button class="tab-button" data-mode="longbreak">
-                        Long Break
-                    </button>
+                    <button class="tab-button active" data-mode="pomodoro">Pomodoro</button>
+                    <button class="tab-button" data-mode="shortbreak">Short Break</button>
+                    <button class="tab-button" data-mode="longbreak">Long Break</button>
                 </div>
 
                 <div class="timer-display" id="timerDisplay">25:00</div>
@@ -540,6 +777,18 @@
                     <button class="btn-start" id="startBtn">START</button>
                     <button class="btn-reset" id="resetBtn">RESET</button>
                 </div>
+            </div>
+
+            <!-- Music Section -->
+            <div class="card media-section" id="music">
+                <h2>🎵 Study Music</h2>
+                <div class="media-grid" id="musicGrid"></div>
+            </div>
+
+            <!-- Videos Section -->
+            <div class="card media-section" id="videos">
+                <h2>🎬 Study Videos</h2>
+                <div class="media-grid" id="videoGrid"></div>
             </div>
         </main>
     </div>
@@ -564,21 +813,18 @@
         const tabButtons = document.querySelectorAll('.tab-button');
         const progressFill = document.getElementById('progressFill');
 
-        // Format time
         function formatTime(seconds) {
             const minutes = Math.floor(seconds / 60);
             const secs = seconds % 60;
             return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
         }
 
-        // Update display
         function updateDisplay() {
             timerDisplay.textContent = formatTime(timeLeft);
             const progress = ((totalTime - timeLeft) / totalTime) * 100;
             progressFill.style.width = progress + '%';
         }
 
-        // Start/Pause timer
         startBtn.addEventListener('click', () => {
             if (isRunning) {
                 clearInterval(timerInterval);
@@ -605,7 +851,6 @@
             }
         });
 
-        // Reset timer
         resetBtn.addEventListener('click', () => {
             clearInterval(timerInterval);
             isRunning = false;
@@ -616,7 +861,6 @@
             startBtn.classList.remove('paused');
         });
 
-        // Mode switching
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 if (isRunning) {
@@ -636,9 +880,7 @@
             });
         });
 
-        // Notification sound
         function playNotification() {
-            // Simple beep sound using Web Audio API
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const oscillator = audioContext.createOscillator();
             const gain = audioContext.createGain();
@@ -662,7 +904,6 @@
         const todoList = document.getElementById('todoList');
         let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-        // Render todos
         function renderTodos() {
             todoList.innerHTML = '';
 
@@ -688,7 +929,6 @@
             });
         }
 
-        // Add todo
         function addTodo() {
             const text = todoInput.value.trim();
             if (text !== '') {
@@ -699,45 +939,240 @@
             }
         }
 
-        // Delete todo
         function deleteTodo(index) {
             todos.splice(index, 1);
             saveTodos();
             renderTodos();
         }
 
-        // Toggle todo
         function toggleTodo(index) {
             todos[index].completed = !todos[index].completed;
             saveTodos();
             renderTodos();
         }
 
-        // Save to localStorage
         function saveTodos() {
             localStorage.setItem('todos', JSON.stringify(todos));
         }
 
-        // Event listeners
         addTodoBtn.addEventListener('click', addTodo);
         todoInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') addTodo();
         });
 
-        // Initial render
         renderTodos();
         updateDisplay();
+
         function logout() {
-            if (confirm('هل تريد فعلاً تسجيل الخروج؟')) {
+            if (confirm('Êtes-vous sûr?')) {
                 localStorage.removeItem('auth_token');
-                localStorage.removeItem('username');
-                showAuthModal();
-                document.getElementById('login-form').reset();
-                document.getElementById('signup-form').reset();
+                window.location.href = 'index.html';
             }
         }
 
+        // ==================== MEDIA MANAGER FROM LOCAL FILES ====================
+        class LocalMediaManager {
+            constructor() {
+                this.audios = [
+                    { id: 1, title: 'Focus Music 1', url: 'musiques/music1.mp3', artist: 'Study Beats', genre: 'Lo-Fi', duration: '2:14' },
+                    { id: 2, title: 'Focus Music 2', url: 'musiques/music2.mp3', artist: 'Relax Vibes', genre: 'Ambient', duration: '6:29' },
+                    { id: 3, title: 'Relaxation Music', url: 'musiques/music3.mp3', artist: 'Calm Sounds', genre: 'Chill', duration: '3:07' },
+                    { id: 4, title: 'Lo-Fi Hip Hop', url: 'musiques/music4.mp3', artist: 'Night Study', genre: 'Hip-Hop', duration: '2:20' }
+                ];
+
+                this.videos = [
+                    { id: 1, title: 'Study Session 1', url: 'videos/video1.mp4', thumbnail: 'images/image20.jpg', duration: '45:29' },
+                    { id: 2, title: 'Study Session 2', url: 'videos/video2.mp4', thumbnail: 'images/image19.jpg', duration: '20:00' },
+                    { id: 3, title: 'Motivation Video', url: 'videos/video3.mp4', thumbnail: 'images/image22.jpg', duration: '08:12' },
+                    { id: 4, title: 'Study Tips', url: 'videos/video4.mp4', thumbnail: 'images/image23.jpg', duration: '03:25' }
+                ];
+
+                this.favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                this.init();
+            }
+
+            init() {
+                this.renderAudios();
+                this.renderVideos();
+                this.attachEventListeners();
+            }
+
+            renderAudios() {
+                const grid = document.getElementById('musicGrid');
+                if (!grid) return;
+
+                grid.innerHTML = this.audios.map(audio => `
+                    <div class="media-card" data-id="${audio.id}" data-type="audio">
+                        <div class="media-header">
+                            <div class="media-title">
+                                <span>${audio.title}</span>
+                                <button class="favorite-btn" data-id="${audio.id}" data-type="audio" title="Favoris">
+                                    ${this.isFavorite('audio', audio.id) ? '❤️' : '🤍'}
+                                </button>
+                            </div>
+                        </div>
+                        <p class="media-meta">${audio.artist} • ${audio.genre}</p>
+                        <p class="media-duration">⏱️ ${audio.duration}</p>
+                        
+                        <audio id="audio-${audio.id}" class="audio-player">
+                            <source src="${audio.url}" type="audio/mpeg">
+                        </audio>
+                        
+                        <div class="audio-controls">
+                            <button class="btn-play" onclick="localMediaManager.playAudio(${audio.id})">▶️</button>
+                            <button class="btn-pause" onclick="localMediaManager.pauseAudio(${audio.id})">⏸️</button>
+                            <button class="btn-stop" onclick="localMediaManager.stopAudio(${audio.id})">⏹️</button>
+                            <button class="btn-download" onclick="localMediaManager.downloadMedia('${audio.url}', '${audio.title}')">⬇️</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            renderVideos() {
+                const grid = document.getElementById('videoGrid');
+                if (!grid) return;
+
+                grid.innerHTML = this.videos.map(video => `
+                    <div class="media-card" data-id="${video.id}" data-type="video">
+                        <div class="video-thumbnail" onclick="localMediaManager.playVideo(${video.id})">
+                            <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23333%22 width=%22300%22 height=%22200%22/%3E%3C/svg%3E'">
+                            <div class="play-overlay">▶️</div>
+                            <span class="video-duration">${video.duration}</span>
+                        </div>
+                        <div class="media-header">
+                            <div class="media-title">
+                                <span>${video.title}</span>
+                                <button class="favorite-btn" data-id="${video.id}" data-type="video" title="Favoris">
+                                    ${this.isFavorite('video', video.id) ? '❤️' : '🤍'}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch" onclick="localMediaManager.playVideo(${video.id})">👁️ Regarder</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            playAudio(id) {
+                const audio = this.audios.find(a => a.id === id);
+                if (!audio) return;
+
+                const audioElement = document.getElementById(`audio-${id}`);
+                document.querySelectorAll('audio').forEach(a => {
+                    if (a !== audioElement) a.pause();
+                });
+
+                audioElement.play();
+                this.showNotification(`▶️ En lecture: ${audio.title}`);
+            }
+
+            pauseAudio(id) {
+                const audioElement = document.getElementById(`audio-${id}`);
+                if (audioElement) {
+                    audioElement.pause();
+                    this.showNotification('⏸️ Mise en pause');
+                }
+            }
+
+            stopAudio(id) {
+                const audioElement = document.getElementById(`audio-${id}`);
+                if (audioElement) {
+                    audioElement.pause();
+                    audioElement.currentTime = 0;
+                    this.showNotification('⏹️ Arrêté');
+                }
+            }
+
+            playVideo(id) {
+                const video = this.videos.find(v => v.id === id);
+                if (!video) return;
+
+                const modal = document.createElement('div');
+                modal.className = 'media-modal';
+                modal.innerHTML = `
+                    <div class="modal-content modal-large">
+                        <button class="modal-close" onclick="this.closest('.media-modal').remove()">✕</button>
+                        <h2>${video.title}</h2>
+                        <video class="modal-video" controls autoplay>
+                            <source src="${video.url}" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <p>⏱️ ${video.duration}</p>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn-favorite" onclick="localMediaManager.toggleFavorite('video', ${video.id})">
+                                ${this.isFavorite('video', video.id) ? '❤️ Favoris' : '🤍 Ajouter'}
+                            </button>
+                            <button class="btn-download-modal" onclick="localMediaManager.downloadMedia('${video.url}', '${video.title}')">⬇️ Télécharger</button>
+                        </div>
+                    </div>
+                `;
+
+                document.body.appendChild(modal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.remove();
+                });
+            }
+
+            isFavorite(type, id) {
+                return this.favorites.includes(`${type}-${id}`);
+            }
+
+            toggleFavorite(type, id) {
+                const key = `${type}-${id}`;
+                if (this.favorites.includes(key)) {
+                    this.favorites = this.favorites.filter(f => f !== key);
+                    this.showNotification('💔 Retiré des favoris');
+                } else {
+                    this.favorites.push(key);
+                    this.showNotification('❤️ Ajouté aux favoris');
+                }
+                localStorage.setItem('favorites', JSON.stringify(this.favorites));
+                this.renderAudios();
+                this.renderVideos();
+            }
+
+            downloadMedia(url, title) {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = title;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                this.showNotification(`⬇️ Téléchargement: ${title}`);
+            }
+
+            showNotification(msg) {
+                const notif = document.createElement('div');
+                notif.className = 'notification';
+                notif.textContent = msg;
+                document.body.appendChild(notif);
+                
+                setTimeout(() => notif.classList.add('show'), 100);
+                setTimeout(() => {
+                    notif.classList.remove('show');
+                    setTimeout(() => notif.remove(), 300);
+                }, 2500);
+            }
+
+            attachEventListeners() {
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('favorite-btn')) {
+                        const type = e.target.dataset.type;
+                        const id = parseInt(e.target.dataset.id);
+                        this.toggleFavorite(type, id);
+                        e.target.textContent = this.isFavorite(type, id) ? '❤️' : '🤍';
+                    }
+                });
+            }
+        }
+
+        // ✅ INITIALISER LE MEDIA MANAGER
+        let localMediaManager;
+        document.addEventListener('DOMContentLoaded', () => {
+            localMediaManager = new LocalMediaManager();
+        });
     </script>
-    
 </body>
 </html>
